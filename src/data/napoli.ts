@@ -1,0 +1,240 @@
+import type { CityContent } from '../types';
+
+export const napoli: CityContent = {
+  sentences: [
+    {
+      id: 'na-s1',
+      it: 'Mi sveglio presto e faccio colazione al bar',
+      en: 'I wake up early and have breakfast at the café',
+      note: 'Svegliarsi is reflexive: mi sveglio, ti svegli, si sveglia…',
+    },
+    {
+      id: 'na-s2',
+      it: 'Ogni domenica mangiamo la pizza con i nostri amici',
+      en: 'Every Sunday we eat pizza with our friends',
+    },
+    {
+      id: 'na-s3',
+      it: 'Il cameriere ci porta il menù subito',
+      en: 'The waiter brings us the menu right away',
+      note: '“Ci” here is an indirect object pronoun: he brings the menu to us.',
+    },
+    {
+      id: 'na-s4',
+      it: 'A che ora ti alzi la mattina?',
+      en: 'What time do you get up in the morning?',
+      note: 'Alzarsi is reflexive: the pronoun ti goes before the verb.',
+    },
+    {
+      id: 'na-s5',
+      it: 'Compro il pesce fresco al mercato',
+      en: 'I buy fresh fish at the market',
+    },
+    {
+      id: 'na-s6',
+      it: 'Non trovo mai un tavolo libero il sabato sera',
+      en: 'I never find a free table on Saturday evenings',
+      note: 'Non + verb + mai: the two negative words work together in Italian.',
+    },
+    {
+      id: 'na-s7',
+      it: 'Ci vediamo davanti alla pizzeria alle otto',
+      en: "See you in front of the pizzeria at eight",
+      note: 'Vedersi (reciprocal): ci vediamo = we’ll see each other.',
+    },
+    {
+      id: 'na-s8',
+      it: 'Preferisco il caffè senza zucchero',
+      en: 'I prefer coffee without sugar',
+    },
+    {
+      id: 'na-s9',
+      it: 'Quanto costa un chilo di pomodori?',
+      en: 'How much does a kilo of tomatoes cost?',
+    },
+    {
+      id: 'na-s10',
+      it: 'Lo chef prepara gli spaghetti alle vongole',
+      en: 'The chef prepares spaghetti with clams',
+    },
+  ],
+  verbs: [
+    {
+      id: 'na-v1',
+      before: 'Io', after: 'sempre la pizza margherita.',
+      infinitive: 'ordinare', tense: 'presente', answer: 'ordino',
+      en: 'I always order the margherita pizza.',
+    },
+    {
+      id: 'na-v2',
+      before: 'Tu a che ora ti', after: 'la mattina?',
+      infinitive: 'alzarsi', tense: 'presente', answer: 'alzi',
+      en: 'What time do you get up in the morning?',
+      note: 'Reflexive: the pronoun “ti” is already there, you conjugate alzare.',
+    },
+    {
+      id: 'na-v3',
+      before: 'Noi', after: 'il caffè dopo pranzo.',
+      infinitive: 'bere', tense: 'presente', answer: 'beviamo',
+      en: 'We drink coffee after lunch.',
+      note: 'Bere is irregular: bevo, bevi, beve, beviamo…',
+    },
+    {
+      id: 'na-v4',
+      before: 'Il cuoco', after: 'il sugo con i pomodori freschi.',
+      infinitive: 'fare', tense: 'presente', answer: 'fa',
+      en: 'The cook makes the sauce with fresh tomatoes.',
+    },
+    {
+      id: 'na-v5',
+      before: 'I napoletani', after: 'la pizza con le mani.',
+      infinitive: 'mangiare', tense: 'presente', answer: 'mangiano',
+      en: 'Neapolitans eat pizza with their hands.',
+    },
+    {
+      id: 'na-v6',
+      before: 'Voi', after: 'un tavolo per due?',
+      infinitive: 'volere', tense: 'presente', answer: 'volete',
+      en: 'Do you (pl.) want a table for two?',
+      note: 'Volere is irregular: voglio, vuoi, vuole, vogliamo, volete, vogliono.',
+    },
+    {
+      id: 'na-v7',
+      before: 'Io non', after: 'mangiare i frutti di mare.',
+      infinitive: 'potere', tense: 'presente', answer: 'posso',
+      en: "I can't eat seafood.",
+    },
+    {
+      id: 'na-v8',
+      before: 'Lei', after: "un'ottima parmigiana.",
+      infinitive: 'cucinare', tense: 'presente', answer: 'cucina',
+      en: 'She cooks an excellent parmigiana.',
+    },
+    {
+      id: 'na-v9',
+      before: 'Noi ci', after: 'al ristorante alle nove.',
+      infinitive: 'sedersi', tense: 'presente', answer: 'sediamo',
+      en: 'We sit down at the restaurant at nine.',
+    },
+    {
+      id: 'na-v10',
+      before: 'Tu', after: 'il conto, per favore?',
+      infinitive: 'chiedere', tense: 'presente', answer: 'chiedi',
+      en: 'Will you ask for the bill, please?',
+    },
+    {
+      id: 'na-v11',
+      before: 'I camerieri', after: 'i piatti in tavola.',
+      infinitive: 'portare', tense: 'presente', answer: 'portano',
+      en: 'The waiters bring the dishes to the table.',
+    },
+    {
+      id: 'na-v12',
+      before: 'Io mi', after: 'sempre le mani prima di cucinare.',
+      infinitive: 'lavarsi', tense: 'presente', answer: 'lavo',
+      en: 'I always wash my hands before cooking.',
+      note: 'Lavarsi le mani: reflexive pronoun + definite article (not “le mie mani”).',
+    },
+  ],
+  vocab: [
+    { id: 'na-w1', it: 'il cameriere', en: 'the waiter' },
+    { id: 'na-w2', it: 'il conto', en: 'the bill' },
+    { id: 'na-w3', it: "l'antipasto", en: 'the appetizer' },
+    { id: 'na-w4', it: 'il contorno', en: 'the side dish' },
+    { id: 'na-w5', it: 'le vongole', en: 'the clams' },
+    { id: 'na-w6', it: 'i frutti di mare', en: 'the seafood' },
+    { id: 'na-w7', it: 'lo scontrino', en: 'the receipt' },
+    { id: 'na-w8', it: 'la mancia', en: 'the tip' },
+    { id: 'na-w9', it: 'il forno a legna', en: 'the wood-fired oven' },
+    { id: 'na-w10', it: "l'impasto", en: 'the dough' },
+    { id: 'na-w11', it: 'saporito', en: 'tasty, flavorful' },
+    { id: 'na-w12', it: 'la fetta', en: 'the slice' },
+    { id: 'na-w13', it: 'il peperoncino', en: 'the chili pepper' },
+    { id: 'na-w14', it: 'abbuffarsi', en: 'to stuff oneself' },
+    { id: 'na-w15', it: "avere l'acquolina in bocca", en: 'to have your mouth watering', isIdiom: true },
+    { id: 'na-w16', it: 'essere una buona forchetta', en: 'to be a hearty eater', isIdiom: true },
+  ],
+  boss: [
+    {
+      npc: 'Benvenuto, tesoro! Hai fame?',
+      npcEn: 'Welcome, sweetheart! Are you hungry?',
+      challenge: {
+        type: 'choice',
+        question: 'Reply: “Yes, very much!”',
+        options: ['Sì, moltissima!', 'No, sono stanco.', 'Ho sete e basta.'],
+        answer: 0,
+        note: 'Fame (hunger) is feminine, so “very much hungry” = moltissima.',
+      },
+    },
+    {
+      npc: 'Cosa ti preparo di buono?',
+      npcEn: 'What shall I make you?',
+      challenge: {
+        type: 'verb',
+        before: 'Io', after: 'assaggiare la tua parmigiana!',
+        infinitive: 'volere', tense: 'presente', answer: 'voglio',
+      },
+    },
+    {
+      npc: 'Ah, la parmigiana! La mia specialità.',
+      npcEn: 'Ah, parmigiana! My specialty.',
+      challenge: {
+        type: 'order',
+        it: 'La tua cucina è la migliore della città',
+        en: 'Your cooking is the best in the city',
+      },
+    },
+    {
+      npc: 'Il ragù deve cuocere per sei ore, capito?',
+      npcEn: 'The ragù has to cook for six hours, understood?',
+      challenge: {
+        type: 'choice',
+        question: 'What does “cuocere” mean?',
+        options: ['to cook', 'to cool down', 'to cut'],
+        answer: 0,
+      },
+    },
+    {
+      npc: 'Qui la domenica è sacra!',
+      npcEn: 'Here, Sunday is sacred!',
+      challenge: {
+        type: 'verb',
+        before: 'Noi', after: 'tutti insieme la domenica.',
+        infinitive: 'mangiare', tense: 'presente', answer: 'mangiamo',
+      },
+    },
+    {
+      npc: 'Ecco il pane fresco del forno sotto casa.',
+      npcEn: 'Here’s fresh bread from the bakery downstairs.',
+      challenge: {
+        type: 'order',
+        it: 'Mi passi il pane per favore?',
+        en: 'Can you pass me the bread, please?',
+      },
+    },
+    {
+      npc: 'E per finire... il babà! Ti piace il dolce?',
+      npcEn: 'And to finish... babà! Do you like dessert?',
+      challenge: {
+        type: 'verb',
+        before: 'Sì, lo', after: '!',
+        infinitive: 'adorare', tense: 'presente', answer: 'adoro',
+        note: '“Lo” is a direct object pronoun standing for “il dolce”.',
+      },
+    },
+    {
+      npc: 'Mangia, mangia! Sei troppo magro!',
+      npcEn: 'Eat, eat! You are too skinny!',
+      challenge: {
+        type: 'choice',
+        question: 'What is Nonna doing?',
+        options: [
+          'Urging you to eat more (a classic!)',
+          'Asking you to leave',
+          'Complimenting your outfit',
+        ],
+        answer: 0,
+      },
+    },
+  ],
+};
