@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CITIES } from '../data/cities';
 import { useGame } from '../state/gameStore';
 import { levelFromXp } from '../lib/scoring';
+import { exportProgress, importProgress } from '../lib/backup';
 import { HUD } from './HUD';
 
 export function Passport() {
@@ -14,6 +16,34 @@ export function Passport() {
   const resetProgress = useGame((s) => s.resetProgress);
   const { level } = levelFromXp(xp);
   const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+
+  const [backupCode, setBackupCode] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+  const [importing, setImporting] = useState(false);
+  const [importText, setImportText] = useState('');
+  const [importError, setImportError] = useState<string | null>(null);
+
+  const handleExport = async () => {
+    const code = exportProgress();
+    if (!code) return;
+    setBackupCode(code);
+    setImporting(false);
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  const handleImport = () => {
+    const error = importProgress(importText);
+    if (error) {
+      setImportError(error);
+    } else {
+      window.location.reload();
+    }
+  };
 
   return (
     <div>
@@ -113,6 +143,95 @@ export function Passport() {
             </div>
           </div>
         )}
+
+        <div className="card" style={{ width: '100%', maxWidth: 560 }}>
+          <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 4 }}>
+            💾 Backup & Restore
+          </div>
+          <div className="subtle" style={{ marginBottom: 12 }}>
+            Progress is saved in this browser. To move it to another device or browser, copy a
+            backup code here and paste it there.
+          </div>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <button className="btn small" onClick={handleExport}>
+              📤 Copy backup code
+            </button>
+            <button
+              className="btn ghost small"
+              onClick={() => {
+                setImporting(true);
+                setBackupCode(null);
+                setImportError(null);
+              }}
+            >
+              📥 Restore from code
+            </button>
+          </div>
+
+          {backupCode && (
+            <div style={{ marginTop: 12 }}>
+              <div className="subtle" style={{ marginBottom: 6 }}>
+                {copied
+                  ? '✓ Copied to clipboard! You can also copy it manually below:'
+                  : 'Copy this code and keep it somewhere safe:'}
+              </div>
+              <textarea
+                readOnly
+                value={backupCode}
+                onFocus={(e) => e.target.select()}
+                style={{
+                  width: '100%',
+                  minHeight: 70,
+                  borderRadius: 10,
+                  border: '2px solid rgba(60,45,20,0.2)',
+                  padding: 8,
+                  fontSize: 11,
+                  fontFamily: 'monospace',
+                  resize: 'vertical',
+                }}
+              />
+            </div>
+          )}
+
+          {importing && (
+            <div style={{ marginTop: 12 }}>
+              <div className="subtle" style={{ marginBottom: 6 }}>
+                Paste your backup code (this replaces the progress on this device):
+              </div>
+              <textarea
+                value={importText}
+                onChange={(e) => {
+                  setImportText(e.target.value);
+                  setImportError(null);
+                }}
+                placeholder="VIAGGIO1.…"
+                style={{
+                  width: '100%',
+                  minHeight: 70,
+                  borderRadius: 10,
+                  border: '2px solid rgba(60,45,20,0.2)',
+                  padding: 8,
+                  fontSize: 11,
+                  fontFamily: 'monospace',
+                  resize: 'vertical',
+                }}
+              />
+              {importError && (
+                <div className="feedback bad" style={{ marginTop: 8, fontSize: 14 }}>
+                  ✗ {importError}
+                </div>
+              )}
+              <button
+                className="btn small"
+                style={{ marginTop: 8 }}
+                disabled={!importText.trim()}
+                onClick={handleImport}
+              >
+                Restore progress ↺
+              </button>
+            </div>
+          )}
+        </div>
 
         <button
           className="btn ghost small"
