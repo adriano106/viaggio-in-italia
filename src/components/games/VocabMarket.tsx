@@ -8,7 +8,7 @@ import { useGame } from '../../state/gameStore';
 import { ResultCard } from '../ResultCard';
 import { HUD } from '../HUD';
 
-const TIME_LIMIT = 100; // seconds
+const TIME_LIMIT = 120; // seconds
 const VISIBLE = 5;
 
 interface CardState {
@@ -65,8 +65,14 @@ export function VocabMarket({ cityId }: { cityId: CityId }) {
     if (finishedRef.current) return;
     finishedRef.current = true;
     const attempts = matched + wrong;
+    // Completing the whole board always earns at least 1 star — accuracy only
+    // decides whether it's 2 or 3. Otherwise: half the board = 1 star.
     const stars =
-      matched === total ? starsFromAccuracy(matched, attempts) : matched >= total / 2 ? 1 : 0;
+      matched === total
+        ? Math.max(1, starsFromAccuracy(matched, attempts))
+        : matched >= total / 2
+          ? 1
+          : 0;
     const xp = sessionXp(matched, stars, run);
     addXp(xp);
     recordStars(cityId, 'vocab', stars);
@@ -115,7 +121,8 @@ export function VocabMarket({ cityId }: { cityId: CityId }) {
       setLeftOrder(swapIn);
       setRightOrder(swapIn);
       if (newMatched === total) {
-        setTimeout(() => finish(newMatched, wrongCount, Math.max(bestRun, newRun)), 500);
+        // Finish immediately so a 0s timer can't steal the result as a timeout.
+        finish(newMatched, wrongCount, Math.max(bestRun, newRun));
       }
     } else {
       setWrongCount((w) => w + 1);
@@ -166,7 +173,11 @@ export function VocabMarket({ cityId }: { cityId: CityId }) {
         onRetry={restart}
         onExit={() => navigate({ type: 'city', cityId })}
         extraNote={
-          matchedCount < total ? "Time's up! Match all the pairs for more stars." : undefined
+          finalStars === 0
+            ? `Time's up at ${matchedCount}/${total} — match at least half the pairs to earn a star. You need 1★ here to unlock the boss!`
+            : matchedCount < total
+              ? "Time's up! Match all the pairs for more stars."
+              : undefined
         }
       />
     );

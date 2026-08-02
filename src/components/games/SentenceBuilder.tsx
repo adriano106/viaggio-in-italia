@@ -110,6 +110,11 @@ export function SentenceBuilder({ cityId }: { cityId: CityId }) {
         xp={finalXp}
         onRetry={restart}
         onExit={() => navigate({ type: 'city', cityId })}
+        extraNote={
+          finalStars === 0
+            ? 'No stars this time — get at least half the sentences right to earn one. You need 1★ here to unlock the boss!'
+            : undefined
+        }
       />
     );
   }

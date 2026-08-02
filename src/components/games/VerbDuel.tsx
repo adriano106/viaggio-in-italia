@@ -123,7 +123,11 @@ export function VerbDuel({ cityId }: { cityId: CityId }) {
         xp={finalXp}
         onRetry={restart}
         onExit={() => navigate({ type: 'city', cityId })}
-        extraNote={outcome === 'lose' ? 'Try again: land 8 hits before losing your 4 hearts!' : undefined}
+        extraNote={
+          outcome === 'lose'
+            ? 'No stars for a loss — land 8 hits before losing your 4 hearts. You need 1★ here to unlock the boss!'
+            : undefined
+        }
       />
     );
   }
