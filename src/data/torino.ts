@@ -1,0 +1,235 @@
+import type { CityContent } from '../types';
+
+export const torino: CityContent = {
+  sentences: [
+    {
+      id: 'to-s1',
+      it: 'Mi alzo alle sette e mezza ogni mattina',
+      en: 'I get up at half past seven every morning',
+      note: 'Reflexive alzarsi + telling time: alle sette e mezza.',
+    },
+    {
+      id: 'to-s2',
+      it: 'Di solito faccio colazione con un cappuccino',
+      en: 'I usually have breakfast with a cappuccino',
+      note: '“Di solito” (usually) typically opens the sentence.',
+    },
+    {
+      id: 'to-s3',
+      it: 'Il caffè qui è sempre molto buono',
+      en: 'The coffee here is always very good',
+    },
+    {
+      id: 'to-s4',
+      it: 'A mezzogiorno pranzo con i miei colleghi',
+      en: 'At noon I have lunch with my colleagues',
+    },
+    {
+      id: 'to-s5',
+      it: 'Ogni tanto mangio un cioccolatino dopo cena',
+      en: 'Every now and then I eat a chocolate after dinner',
+      note: 'Ogni tanto = every now and then.',
+    },
+    {
+      id: 'to-s6',
+      it: 'La sera mi rilasso con un buon libro',
+      en: 'In the evening I relax with a good book',
+      note: 'Rilassarsi is reflexive: mi rilasso.',
+    },
+    {
+      id: 'to-s7',
+      it: 'Il museo del cinema apre alle nove in punto',
+      en: 'The cinema museum opens at nine sharp',
+    },
+    {
+      id: 'to-s8',
+      it: 'Prendiamo sempre il tram per andare al lavoro',
+      en: 'We always take the tram to go to work',
+    },
+    {
+      id: 'to-s9',
+      it: 'Sono le cinque meno un quarto',
+      en: "It's a quarter to five",
+      note: 'Meno un quarto = a quarter to.',
+    },
+    {
+      id: 'to-s10',
+      it: 'Non bevo mai il caffè dopo le sei di sera',
+      en: 'I never drink coffee after six in the evening',
+      note: 'Non + verb + mai: double negative is correct in Italian.',
+    },
+  ],
+  dettato: [
+    { id: 'to-d1', it: 'Il treno parte alle otto', en: 'The train leaves at eight' },
+    { id: 'to-d2', it: 'Mi sveglio sempre presto', en: 'I always wake up early' },
+    {
+      id: 'to-d3',
+      it: 'Vorrei un caffè macchiato per favore',
+      en: "I'd like a caffè macchiato please",
+    },
+    { id: 'to-d4', it: 'Stasera andiamo al cinema', en: "Tonight we're going to the cinema" },
+    { id: 'to-d5', it: 'La colazione è pronta', en: 'Breakfast is ready' },
+    { id: 'to-d6', it: 'Lavoro dal lunedì al venerdì', en: 'I work from Monday to Friday' },
+    { id: 'to-d7', it: 'Il bar chiude a mezzanotte', en: 'The bar closes at midnight' },
+    { id: 'to-d8', it: 'Ci vediamo domani mattina', en: 'See you tomorrow morning' },
+  ],
+  verbs: [
+    {
+      id: 'to-v1',
+      before: 'Io mi', after: 'alle sette per aprire il bar.',
+      infinitive: 'svegliarsi', tense: 'presente', answer: 'sveglio',
+      en: 'I wake up at seven to open the bar.',
+    },
+    {
+      id: 'to-v2',
+      before: 'Tu ti', after: 'i denti dopo colazione.',
+      infinitive: 'lavarsi', tense: 'presente', answer: 'lavi',
+      en: 'You brush your teeth after breakfast.',
+    },
+    {
+      id: 'to-v3',
+      before: 'Noi ci', after: 'al bar ogni mattina.',
+      infinitive: 'incontrarsi', tense: 'presente', answer: 'incontriamo',
+      en: 'We meet at the café every morning.',
+    },
+    {
+      id: 'to-v4',
+      before: 'Lei si', after: 'sempre in modo elegante.',
+      infinitive: 'vestirsi', tense: 'presente', answer: 'veste',
+      en: 'She always dresses elegantly.',
+    },
+    {
+      id: 'to-v5',
+      before: 'Loro si', after: 'tardi il sabato.',
+      infinitive: 'alzarsi', tense: 'presente', answer: 'alzano',
+      en: 'They get up late on Saturdays.',
+    },
+    {
+      id: 'to-v6',
+      before: 'Io', after: 'il tram delle otto.',
+      infinitive: 'prendere', tense: 'presente', answer: 'prendo',
+      en: "I take the eight o'clock tram.",
+    },
+    {
+      id: 'to-v7',
+      before: 'Voi vi', after: 'presto la sera?',
+      infinitive: 'addormentarsi', tense: 'presente', answer: 'addormentate',
+      en: 'Do you fall asleep early in the evening?',
+    },
+    {
+      id: 'to-v8',
+      before: 'Il bar', after: 'alle sei e mezza.',
+      infinitive: 'aprire', tense: 'presente', answer: 'apre',
+      en: 'The bar opens at half past six.',
+    },
+    {
+      id: 'to-v9',
+      before: 'Noi', after: 'una pausa alle undici.',
+      infinitive: 'fare', tense: 'presente', answer: 'facciamo',
+      en: 'We take a break at eleven.',
+    },
+    {
+      id: 'to-v10',
+      before: 'Tu', after: 'il giornale ogni giorno?',
+      infinitive: 'leggere', tense: 'presente', answer: 'leggi',
+      en: 'Do you read the newspaper every day?',
+    },
+  ],
+  vocab: [
+    { id: 'to-w1', it: 'la sveglia', en: 'the alarm clock' },
+    { id: 'to-w2', it: 'fare colazione', en: 'to have breakfast' },
+    { id: 'to-w3', it: 'la merenda', en: 'the afternoon snack' },
+    { id: 'to-w4', it: 'lo spuntino', en: 'the quick snack' },
+    { id: 'to-w5', it: 'il tramezzino', en: 'the crustless sandwich' },
+    { id: 'to-w6', it: 'la cioccolata calda', en: 'the hot chocolate' },
+    { id: 'to-w7', it: 'il quotidiano', en: 'the daily newspaper' },
+    { id: 'to-w8', it: 'la pausa pranzo', en: 'the lunch break' },
+    { id: 'to-w9', it: 'in orario', en: 'on time' },
+    { id: 'to-w10', it: 'in ritardo', en: 'late, behind time' },
+    { id: 'to-w11', it: "di buon'ora", en: 'bright and early' },
+    { id: 'to-w12', it: 'il turno', en: 'the (work) shift' },
+    { id: 'to-w13', it: 'la tazzina', en: 'the espresso cup' },
+    { id: 'to-w14', it: 'il chiosco', en: 'the kiosk' },
+    { id: 'to-w15', it: 'alzarsi col piede sbagliato', en: 'to get up on the wrong side of the bed', isIdiom: true },
+    { id: 'to-w16', it: 'avere una fame da lupi', en: 'to be ravenously hungry', isIdiom: true },
+  ],
+  boss: [
+    {
+      npc: 'Benvenuto al nostro caffè storico! Che cosa desidera?',
+      npcEn: 'Welcome to our historic café! What would you like?',
+      challenge: {
+        type: 'choice',
+        question: 'Order politely:',
+        options: ['Vorrei un bicerin, per favore', 'Dammi un bicerin!', 'Bicerin. Subito.'],
+        answer: 0,
+        note: 'Vorrei (conditional) is the polite way to order.',
+      },
+    },
+    {
+      npc: 'Ottima scelta! Sa, io lavoro qui da quarant’anni.',
+      npcEn: "Excellent choice! You know, I've worked here for forty years.",
+      challenge: {
+        type: 'verb',
+        before: 'Io mi', after: 'ogni giorno alle sei per aprire il caffè.',
+        infinitive: 'svegliarsi', tense: 'presente', answer: 'sveglio',
+      },
+    },
+    {
+      npc: 'Domenica facciamo orario ridotto.',
+      npcEn: 'On Sundays we have shorter hours.',
+      challenge: {
+        type: 'order',
+        it: 'A che ora apre il caffè la domenica?',
+        en: 'What time does the café open on Sundays?',
+      },
+    },
+    {
+      npc: 'Le porto anche qualcosa da mangiare?',
+      npcEn: 'Shall I bring you something to eat too?',
+      challenge: {
+        type: 'choice',
+        question: '“Il tramezzino” è...',
+        options: ['a crustless sandwich invented in Turin', 'a type of coffee', 'a tram ticket'],
+        answer: 0,
+      },
+    },
+    {
+      npc: 'La sera qui è tranquilla.',
+      npcEn: 'Evenings here are quiet.',
+      challenge: {
+        type: 'verb',
+        before: 'Noi', after: 'alle otto di sera.',
+        infinitive: 'chiudere', tense: 'presente', answer: 'chiudiamo',
+      },
+    },
+    {
+      npc: 'E lei, che abitudini ha?',
+      npcEn: 'And you, what are your habits?',
+      challenge: {
+        type: 'order',
+        it: 'Di solito prendo la merenda alle quattro',
+        en: 'I usually have an afternoon snack at four',
+      },
+    },
+    {
+      npc: 'Guardi l’orologio: quasi ora di chiusura!',
+      npcEn: 'Look at the clock: almost closing time!',
+      challenge: {
+        type: 'choice',
+        question: 'Sono le 16:45. Come si dice?',
+        options: ['Sono le cinque meno un quarto', 'Sono le quattro e mezza', 'È mezzogiorno'],
+        answer: 0,
+        note: 'Meno un quarto = a quarter to the next hour.',
+      },
+    },
+    {
+      npc: 'Torni presto a trovarci!',
+      npcEn: 'Come back and see us soon!',
+      challenge: {
+        type: 'verb',
+        before: 'Voi vi', after: 'qui con una cioccolata calda!',
+        infinitive: 'rilassarsi', tense: 'presente', answer: 'rilassate',
+      },
+    },
+  ],
+};

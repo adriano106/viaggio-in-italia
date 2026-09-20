@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { CityId, GameId, Mistake, Screen } from '../types';
-import { CITIES } from '../data/cities';
+import { CITIES, cityById } from '../data/cities';
 
 function todayKey(): string {
   return new Date().toISOString().slice(0, 10);
@@ -11,6 +11,12 @@ function yesterdayKey(): string {
   const d = new Date();
   d.setDate(d.getDate() - 1);
   return d.toISOString().slice(0, 10);
+}
+
+export interface DailyState {
+  date: string; // YYYY-MM-DD of the last completed challenge
+  correct: number;
+  totalCompleted: number; // lifetime count, powers achievements
 }
 
 interface GameState {
@@ -23,6 +29,8 @@ interface GameState {
   mistakes: Mistake[];
   totalCorrect: number;
   totalAnswered: number;
+  daily: DailyState;
+  counters: Record<string, number>; // event counters powering achievements
 
   navigate: (screen: Screen) => void;
   addXp: (amount: number) => void;
@@ -32,6 +40,8 @@ interface GameState {
   addMistake: (m: Omit<Mistake, 'timesMissed'>) => void;
   resolveMistake: (id: string) => void;
   recordAnswer: (correct: boolean) => void;
+  bumpCounter: (key: string) => void;
+  completeDaily: (date: string, correct: number) => void;
   resetProgress: () => void;
 }
 
@@ -51,6 +61,8 @@ export const useGame = create<GameState>()(
       mistakes: [],
       totalCorrect: 0,
       totalAnswered: 0,
+      daily: { date: '', correct: 0, totalCompleted: 0 },
+      counters: {},
 
       navigate: (screen) => set({ screen }),
 
@@ -96,6 +108,18 @@ export const useGame = create<GameState>()(
           totalCorrect: s.totalCorrect + (correct ? 1 : 0),
         })),
 
+      bumpCounter: (key) =>
+        set((s) => ({ counters: { ...s.counters, [key]: (s.counters[key] ?? 0) + 1 } })),
+
+      completeDaily: (date, correct) =>
+        set((s) =>
+          s.daily.date === date
+            ? s
+            : {
+                daily: { date, correct, totalCompleted: s.daily.totalCompleted + 1 },
+              },
+        ),
+
       resetProgress: () =>
         set({
           xp: 0,
@@ -106,6 +130,8 @@ export const useGame = create<GameState>()(
           mistakes: [],
           totalCorrect: 0,
           totalAnswered: 0,
+          daily: { date: '', correct: 0, totalCompleted: 0 },
+          counters: {},
           screen: { type: 'map' },
         }),
     }),
@@ -120,6 +146,8 @@ export const useGame = create<GameState>()(
         mistakes: s.mistakes,
         totalCorrect: s.totalCorrect,
         totalAnswered: s.totalAnswered,
+        daily: s.daily,
+        counters: s.counters,
       }),
     },
   ),
@@ -132,9 +160,7 @@ export function isCityUnlocked(cityId: CityId, stamps: CityId[]): boolean {
   return stamps.includes(CITIES[idx - 1].id);
 }
 
-/** The boss unlocks once all three mini-games have at least one star. */
+/** The boss unlocks once the city's three mini-games have at least one star. */
 export function isBossUnlocked(cityId: CityId, stars: Record<string, number>): boolean {
-  return (['sentence', 'verbs', 'vocab'] as GameId[]).every(
-    (g) => (stars[starKey(cityId, g)] ?? 0) >= 1,
-  );
+  return cityById(cityId).games.every((g) => (stars[starKey(cityId, g)] ?? 0) >= 1);
 }

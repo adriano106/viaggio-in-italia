@@ -1,6 +1,15 @@
-export type CityId = 'napoli' | 'roma' | 'firenze' | 'bologna' | 'venezia' | 'milano';
+export type CityId =
+  | 'napoli'
+  | 'roma'
+  | 'firenze'
+  | 'bologna'
+  | 'venezia'
+  | 'milano'
+  | 'torino'
+  | 'verona'
+  | 'palermo';
 
-export type GameId = 'sentence' | 'verbs' | 'vocab' | 'boss';
+export type GameId = 'sentence' | 'verbs' | 'vocab' | 'dettato' | 'prepositions' | 'boss';
 
 export interface CityDef {
   id: CityId;
@@ -13,6 +22,8 @@ export interface CityDef {
   x: number; // SVG map coordinates
   y: number;
   color: string;
+  route: 1 | 2; // journey 1 (Napoli→Milano) or the Secondo Viaggio
+  games: GameId[]; // the city's three mini-games (boss excluded)
   opponent: { name: string; emoji: string; title: string };
   boss: { name: string; emoji: string; intro: string };
 }
@@ -44,6 +55,17 @@ export interface VocabItem {
   isIdiom?: boolean;
 }
 
+/** Preposition gap-fill item: tap the right preposition from the options. */
+export interface PrepItem {
+  id: string;
+  before: string;
+  after: string;
+  answer: string;
+  options: string[]; // includes the answer
+  en: string;
+  note?: string;
+}
+
 export type BossChallenge =
   | { type: 'verb'; before: string; after: string; infinitive: string; tense: string; answer: string; note?: string }
   | { type: 'order'; it: string; en: string; note?: string }
@@ -59,6 +81,9 @@ export interface CityContent {
   sentences: SentenceItem[];
   verbs: VerbItem[];
   vocab: VocabItem[];
+  /** Dictation items: the sentence is spoken aloud and rebuilt from tiles. */
+  dettato?: SentenceItem[];
+  prepositions?: PrepItem[];
   boss: BossStep[];
 }
 
@@ -86,4 +111,5 @@ export type Screen =
   | { type: 'city'; cityId: CityId }
   | { type: 'game'; cityId: CityId; game: GameId }
   | { type: 'ripasso' }
+  | { type: 'daily' }
   | { type: 'passport' };

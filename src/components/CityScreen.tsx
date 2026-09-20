@@ -4,11 +4,13 @@ import { isBossUnlocked, starKey, useGame } from '../state/gameStore';
 import type { CityId, GameId } from '../types';
 import { HUD } from './HUD';
 
-const GAME_META: { id: GameId; title: string; emoji: string; desc: string }[] = [
-  { id: 'sentence', title: 'Sentence Builder', emoji: '🧱', desc: 'Put the words back in order' },
-  { id: 'verbs', title: 'Verb Duel', emoji: '⚔️', desc: 'Conjugate to strike!' },
-  { id: 'vocab', title: 'Word Market', emoji: '🛍️', desc: 'Match words to their meanings' },
-];
+const GAME_META: Partial<Record<GameId, { title: string; emoji: string; desc: string }>> = {
+  sentence: { title: 'Sentence Builder', emoji: '🧱', desc: 'Put the words back in order' },
+  verbs: { title: 'Verb Duel', emoji: '⚔️', desc: 'Conjugate to strike!' },
+  vocab: { title: 'Word Market', emoji: '🛍️', desc: 'Match words to their meanings' },
+  dettato: { title: 'Il Dettato', emoji: '🎧', desc: 'Rebuild the sentence you hear' },
+  prepositions: { title: 'Preposition Bridge', emoji: '🌉', desc: 'Pick the right preposition, fast!' },
+};
 
 export function CityScreen({ cityId }: { cityId: CityId }) {
   const city = cityById(cityId);
@@ -58,11 +60,12 @@ export function CityScreen({ cityId }: { cityId: CityId }) {
             maxWidth: 760,
           }}
         >
-          {GAME_META.map((g, i) => {
-            const s = stars[starKey(cityId, g.id)] ?? 0;
+          {city.games.map((gameId, i) => {
+            const g = GAME_META[gameId]!;
+            const s = stars[starKey(cityId, gameId)] ?? 0;
             return (
               <motion.div
-                key={g.id}
+                key={gameId}
                 className="card center-col"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -76,7 +79,7 @@ export function CityScreen({ cityId }: { cityId: CityId }) {
                 <button
                   className="btn"
                   style={{ background: city.color, boxShadow: `0 4px 0 rgba(0,0,0,0.25)` }}
-                  onClick={() => navigate({ type: 'game', cityId, game: g.id })}
+                  onClick={() => navigate({ type: 'game', cityId, game: gameId })}
                 >
                   Play
                 </button>

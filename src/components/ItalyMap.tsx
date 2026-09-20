@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { CITIES } from '../data/cities';
+import { CITIES, cityById } from '../data/cities';
 import { isCityUnlocked, useGame } from '../state/gameStore';
-import type { GameId } from '../types';
+import type { CityId } from '../types';
+import { todayKey } from '../lib/daily';
 
 /** Stylized Italy boot with Sicily and Sardinia. */
 const ITALY_PATH =
@@ -15,16 +16,23 @@ const ITALY_PATH =
 const SICILY_PATH = 'M235,455 L295,448 L305,470 L280,495 L245,490 L228,472 Z';
 const SARDINIA_PATH = 'M100,285 L130,278 L140,310 L138,355 L118,375 L100,350 Z';
 
-const GAME_IDS: GameId[] = ['sentence', 'verbs', 'vocab', 'boss'];
-
 export function ItalyMap() {
   const stamps = useGame((s) => s.stamps);
   const stars = useGame((s) => s.stars);
   const mistakes = useGame((s) => s.mistakes);
+  const daily = useGame((s) => s.daily);
   const navigate = useGame((s) => s.navigate);
 
-  const totalStars = (cityId: string) =>
-    GAME_IDS.reduce((sum, g) => sum + (stars[`${cityId}:${g}`] ?? 0), 0);
+  const totalStars = (cityId: CityId) =>
+    [...cityById(cityId).games, 'boss'].reduce(
+      (sum, g) => sum + (stars[`${cityId}:${g}`] ?? 0),
+      0,
+    );
+
+  const route1 = CITIES.filter((c) => c.route === 1);
+  const route2 = CITIES.filter((c) => c.route === 2);
+  const route2Open = stamps.includes('milano');
+  const dailyDone = daily.date === todayKey();
 
   return (
     <div className="map-wrap center-col">
@@ -54,9 +62,9 @@ export function ItalyMap() {
             <path d={SARDINIA_PATH} fill="#e9dfc3" stroke="#b7a97f" strokeWidth="2.5" strokeLinejoin="round" />
           </g>
 
-          {/* Journey route */}
+          {/* Journey routes */}
           <polyline
-            points={CITIES.map((c) => `${c.x},${c.y}`).join(' ')}
+            points={route1.map((c) => `${c.x},${c.y}`).join(' ')}
             fill="none"
             stroke="#8a6d3b"
             strokeWidth="3"
@@ -64,6 +72,31 @@ export function ItalyMap() {
             strokeLinecap="round"
             opacity="0.7"
           />
+          {route2Open && (
+            <>
+              <polyline
+                points={[route1[route1.length - 1], ...route2]
+                  .map((c) => `${c.x},${c.y}`)
+                  .join(' ')}
+                fill="none"
+                stroke="#c2455f"
+                strokeWidth="3"
+                strokeDasharray="1 9"
+                strokeLinecap="round"
+                opacity="0.7"
+              />
+              <text
+                x="62"
+                y="66"
+                fontSize="11"
+                fill="#c2455f"
+                fontWeight="700"
+                style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic' }}
+              >
+                Il Secondo Viaggio ✨
+              </text>
+            </>
+          )}
 
           {/* Decorations */}
           <text x="90" y="440" fontSize="20" opacity="0.7">🌊</text>
@@ -107,7 +140,7 @@ export function ItalyMap() {
                 )}
                 <text
                   x={city.x}
-                  y={city.y + 38}
+                  y={city.id === 'verona' ? city.y - 26 : city.y + 38}
                   textAnchor="middle"
                   fontSize="14"
                   fontWeight="800"
@@ -128,6 +161,13 @@ export function ItalyMap() {
       </div>
 
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <button
+          className="btn"
+          style={dailyDone ? { filter: 'saturate(0.6)' } : undefined}
+          onClick={() => navigate({ type: 'daily' })}
+        >
+          {dailyDone ? `🗓️ Daily done ✓ (${daily.correct}/10)` : '🗓️ Daily Challenge'}
+        </button>
         <button className="btn ghost" onClick={() => navigate({ type: 'passport' })}>
           🛂 Passport
         </button>

@@ -5,6 +5,9 @@ import { firenze } from './firenze';
 import { bologna } from './bologna';
 import { venezia } from './venezia';
 import { milano } from './milano';
+import { torino } from './torino';
+import { verona } from './verona';
+import { palermo } from './palermo';
 
 /** Journey order: south → north. */
 export const CITIES: CityDef[] = [
@@ -19,6 +22,8 @@ export const CITIES: CityDef[] = [
     x: 272,
     y: 328,
     color: '#e15b4e',
+    route: 1,
+    games: ['sentence', 'verbs', 'vocab'],
     opponent: { name: 'Don Gennaro', emoji: '👨‍🍳', title: 'il Pizzaiolo' },
     boss: {
       name: 'Nonna Concetta',
@@ -37,6 +42,8 @@ export const CITIES: CityDef[] = [
     x: 230,
     y: 268,
     color: '#c98a2e',
+    route: 1,
+    games: ['sentence', 'verbs', 'vocab'],
     opponent: { name: 'Marco', emoji: '🛡️', title: 'il Centurione' },
     boss: {
       name: 'Sor Augusto',
@@ -55,6 +62,8 @@ export const CITIES: CityDef[] = [
     x: 195,
     y: 205,
     color: '#8e5aa8',
+    route: 1,
+    games: ['sentence', 'verbs', 'vocab'],
     opponent: { name: 'Lucrezia', emoji: '👩‍🎨', title: 'la Pittrice' },
     boss: {
       name: 'Maestro Vasari',
@@ -73,6 +82,8 @@ export const CITIES: CityDef[] = [
     x: 200,
     y: 160,
     color: '#b03a48',
+    route: 1,
+    games: ['sentence', 'verbs', 'vocab'],
     opponent: { name: 'Balanzone', emoji: '📚', title: 'il Professorone' },
     boss: {
       name: 'Prof.ssa Morandi',
@@ -91,6 +102,8 @@ export const CITIES: CityDef[] = [
     x: 240,
     y: 112,
     color: '#2e86ab',
+    route: 1,
+    games: ['sentence', 'verbs', 'vocab'],
     opponent: { name: 'Giacomo', emoji: '🚣', title: 'il Gondoliere' },
     boss: {
       name: 'Capitan Alvise',
@@ -109,11 +122,74 @@ export const CITIES: CityDef[] = [
     x: 165,
     y: 102,
     color: '#d6336c',
+    route: 1,
+    games: ['sentence', 'verbs', 'vocab'],
     opponent: { name: 'Donatella', emoji: '💃', title: 'la Stilista' },
     boss: {
       name: 'Direttrice Visconti',
       emoji: '🕶️',
       intro: 'The final job interview: the subjunctive decides everything!',
+    },
+  },
+  // ---- Il Secondo Viaggio (route 2, unlocked by Milano's stamp) ----
+  {
+    id: 'torino',
+    name: 'Torino',
+    emoji: '☕',
+    theme: 'Caffè & Routine',
+    themeEn: 'Café & Daily Routine',
+    grammar: 'Reflexives, telling time, frequency',
+    tagline: 'Un bicerin e tutto va meglio.',
+    x: 118,
+    y: 112,
+    color: '#7a5c3e',
+    route: 2,
+    games: ['sentence', 'dettato', 'vocab'],
+    opponent: { name: 'Amedeo', emoji: '🧑‍🍳', title: 'il Barista' },
+    boss: {
+      name: 'Madame Giulia',
+      emoji: '👩‍🦳',
+      intro: 'An afternoon at the historic café: routines, times, and good manners!',
+    },
+  },
+  {
+    id: 'verona',
+    name: 'Verona',
+    emoji: '💘',
+    theme: 'Amore & Inviti',
+    themeEn: 'Love & Invitations',
+    grammar: 'Object pronouns, ti va di…?',
+    tagline: 'La città degli innamorati.',
+    x: 207,
+    y: 122,
+    color: '#c2455f',
+    route: 2,
+    games: ['verbs', 'prepositions', 'dettato'],
+    opponent: { name: 'Romeo', emoji: '🥀', title: 'il Poeta' },
+    boss: {
+      name: 'Giulietta',
+      emoji: '👸',
+      intro: "Under Juliet's balcony: win her over with the right pronouns!",
+    },
+  },
+  {
+    id: 'palermo',
+    name: 'Palermo',
+    emoji: '🍋',
+    theme: 'Mercato & Famiglia',
+    themeEn: 'Market & Family',
+    grammar: 'Partitives (del/della), quantities',
+    tagline: 'Il gran finale, in famiglia.',
+    x: 248,
+    y: 468,
+    color: '#d9a520',
+    route: 2,
+    games: ['prepositions', 'vocab', 'sentence'],
+    opponent: { name: 'Turi', emoji: '🍊', title: 'il Fruttivendolo' },
+    boss: {
+      name: 'Zio Salvatore',
+      emoji: '👨‍🦳',
+      intro: 'Sunday lunch with the whole family watching!',
     },
   },
 ];
@@ -125,6 +201,9 @@ export const CONTENT: Record<CityId, CityContent> = {
   bologna,
   venezia,
   milano,
+  torino,
+  verona,
+  palermo,
 };
 
 export function cityById(id: CityId): CityDef {

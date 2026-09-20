@@ -20,6 +20,7 @@ export function RipassoDeck() {
   const addXp = useGame((s) => s.addXp);
   const touchStreak = useGame((s) => s.touchStreak);
   const recordAnswer = useGame((s) => s.recordAnswer);
+  const bumpCounter = useGame((s) => s.bumpCounter);
 
   const [session, setSession] = useState(0);
   const deck = useMemo(
@@ -64,6 +65,7 @@ export function RipassoDeck() {
     if (good) {
       setFixed((f) => f + 1);
       resolveMistake(item.id);
+      bumpCounter('ripassoFixed');
       setFeedback({ kind: 'good', message: 'Correct! Removed from the review deck. ✂️', note: item.note });
     } else {
       addMistake(item); // bumps timesMissed

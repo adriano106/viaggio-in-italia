@@ -4,6 +4,7 @@ import { CITIES } from '../data/cities';
 import { useGame } from '../state/gameStore';
 import { levelFromXp } from '../lib/scoring';
 import { exportProgress, importProgress } from '../lib/backup';
+import { ACHIEVEMENTS } from '../lib/achievements';
 import { HUD } from './HUD';
 
 export function Passport() {
@@ -14,8 +15,24 @@ export function Passport() {
   const totalCorrect = useGame((s) => s.totalCorrect);
   const totalAnswered = useGame((s) => s.totalAnswered);
   const resetProgress = useGame((s) => s.resetProgress);
+  const stars = useGame((s) => s.stars);
+  const streakCount = useGame((s) => s.streakCount);
+  const counters = useGame((s) => s.counters);
+  const daily = useGame((s) => s.daily);
   const { level } = levelFromXp(xp);
   const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+
+  const achState = {
+    xp,
+    stars,
+    stamps,
+    streakCount,
+    totalCorrect,
+    totalAnswered,
+    counters,
+    dailyTotalCompleted: daily.totalCompleted,
+  };
+  const unlockedBadges = ACHIEVEMENTS.filter((a) => a.test(achState));
 
   const [backupCode, setBackupCode] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -130,6 +147,51 @@ export function Passport() {
           <div className="hud-pill">🎯 {accuracy}% accuracy</div>
           <div className="hud-pill">
             🛂 {stamps.length}/{CITIES.length} stamps
+          </div>
+        </div>
+
+        <div className="card" style={{ width: '100%', maxWidth: 560 }}>
+          <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 10 }}>
+            🏅 Achievements ({unlockedBadges.length}/{ACHIEVEMENTS.length})
+          </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+              gap: 10,
+            }}
+          >
+            {ACHIEVEMENTS.map((a) => {
+              const got = unlockedBadges.includes(a);
+              return (
+                <div
+                  key={a.id}
+                  title={a.desc}
+                  style={{
+                    display: 'flex',
+                    gap: 8,
+                    alignItems: 'center',
+                    padding: '8px 10px',
+                    borderRadius: 12,
+                    background: got ? '#fdf3dc' : 'var(--cream-dark)',
+                    border: got ? '2px solid var(--gold)' : '2px solid transparent',
+                    opacity: got ? 1 : 0.55,
+                  }}
+                >
+                  <span style={{ fontSize: 22, filter: got ? 'none' : 'grayscale(1)' }}>
+                    {a.emoji}
+                  </span>
+                  <span style={{ minWidth: 0 }}>
+                    <span style={{ display: 'block', fontWeight: 700, fontSize: 13 }}>
+                      {a.title}
+                    </span>
+                    <span className="subtle" style={{ fontSize: 11, lineHeight: 1.3, display: 'block' }}>
+                      {a.desc}
+                    </span>
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
 

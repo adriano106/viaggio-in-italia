@@ -21,6 +21,7 @@ export function VerbDuel({ cityId }: { cityId: CityId }) {
   const touchStreak = useGame((s) => s.touchStreak);
   const addMistake = useGame((s) => s.addMistake);
   const recordAnswer = useGame((s) => s.recordAnswer);
+  const bumpCounter = useGame((s) => s.bumpCounter);
 
   const [session, setSession] = useState(0);
   const items = useMemo(
@@ -45,6 +46,7 @@ export function VerbDuel({ cityId }: { cityId: CityId }) {
   const finish = (won: boolean, heartsLeft: number, totalHits: number) => {
     const stars = won ? (heartsLeft >= MAX_HEARTS ? 3 : heartsLeft >= 3 ? 2 : 1) : 0;
     const xp = won ? sessionXp(totalHits, stars, totalHits) : totalHits * 5;
+    if (won && heartsLeft >= MAX_HEARTS) bumpCounter('perfectDuel');
     addXp(xp);
     recordStars(cityId, 'verbs', stars);
     touchStreak();
