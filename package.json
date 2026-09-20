@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "deploy": "npm run build && cd dist && rm -rf .git && git init -q && git add -A && git commit -qm deploy && git -c credential.helper='!gh auth git-credential' push -f https://github.com/adriano106/viaggio-in-italia.git HEAD:gh-pages && rm -rf .git"
+    "preview": "vite preview"
   },
   "dependencies": {
     "framer-motion": "^11.11.17",
