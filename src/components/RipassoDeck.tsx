@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { matchAnswer, sample } from '../lib/answers';
 import { useGame } from '../state/gameStore';
@@ -34,6 +34,11 @@ export function RipassoDeck() {
   const [done, setDone] = useState(false);
   const [finalXp, setFinalXp] = useState(0);
 
+  // Guards the finish block against double-fire: the exiting card stays
+  // clickable during its AnimatePresence exit animation, so next() can fire
+  // twice (double-click, or held Enter on the autofocused button).
+  const finishedRef = useRef(false);
+
   if (deck.length === 0) {
     return (
       <div>
@@ -50,7 +55,7 @@ export function RipassoDeck() {
     );
   }
 
-  const item = deck[idx];
+  const item = deck[Math.min(idx, deck.length - 1)];
 
   const submit = (value: string) => {
     if (feedback) return;
@@ -69,17 +74,22 @@ export function RipassoDeck() {
   const next = () => {
     setFeedback(null);
     if (idx + 1 >= deck.length) {
+      if (finishedRef.current) return;
+      finishedRef.current = true;
       const xp = fixed * XP_PER_FIX;
       addXp(xp);
       touchStreak();
       setFinalXp(xp);
       setDone(true);
     } else {
-      setIdx((i) => i + 1);
+      // Non-functional update on purpose: a stale double-fire from the exiting
+      // card sets the same value again instead of skipping an item.
+      setIdx(idx + 1);
     }
   };
 
   const restart = () => {
+    finishedRef.current = false;
     setSession((s) => s + 1);
     setIdx(0);
     setFixed(0);

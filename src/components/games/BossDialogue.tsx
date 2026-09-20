@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { BossChallenge, CityId } from '../../types';
 import { CONTENT, CITIES, cityById } from '../../data/cities';
@@ -35,7 +35,12 @@ export function BossDialogue({ cityId }: { cityId: CityId }) {
   const [finalStars, setFinalStars] = useState(0);
   const [justStamped, setJustStamped] = useState(false);
 
-  const step = steps[stepIdx];
+  // Guards the finish block against double-fire: the exiting card stays
+  // clickable during its AnimatePresence exit animation, so next() can fire
+  // twice (double-click, or held Enter on the autofocused button).
+  const finishedRef = useRef(false);
+
+  const step = steps[Math.min(stepIdx, steps.length - 1)];
   const nextCity = CITIES[CITIES.findIndex((c) => c.id === cityId) + 1];
 
   const answered = (good: boolean, correctAnswer: string, note?: string) => {
@@ -63,6 +68,8 @@ export function BossDialogue({ cityId }: { cityId: CityId }) {
     setFeedback(null);
     setShowEn(false);
     if (stepIdx + 1 >= steps.length) {
+      if (finishedRef.current) return;
+      finishedRef.current = true;
       const didPass = correct >= PASS_THRESHOLD;
       const stars = correct >= steps.length ? 3 : correct >= 7 ? 2 : didPass ? 1 : 0;
       const wasStamped = stamps.includes(cityId);
@@ -79,11 +86,14 @@ export function BossDialogue({ cityId }: { cityId: CityId }) {
       setFinalStars(stars);
       setDone(true);
     } else {
-      setStepIdx((i) => i + 1);
+      // Non-functional update on purpose: a stale double-fire from the exiting
+      // card sets the same value again instead of skipping a step.
+      setStepIdx(stepIdx + 1);
     }
   };
 
   const restart = () => {
+    finishedRef.current = false;
     setSession((s) => s + 1);
     setStepIdx(0);
     setCorrect(0);

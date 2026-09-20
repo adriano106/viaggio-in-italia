@@ -99,7 +99,10 @@ export function VerbDuel({ cityId }: { cityId: CityId }) {
 
   const next = () => {
     setFeedback(null);
-    setIdx((i) => i + 1);
+    // Non-functional update on purpose: a stale double-fire from the exiting
+    // card (still clickable during its exit animation) sets the same value
+    // again instead of skipping a question.
+    setIdx(idx + 1);
   };
 
   const restart = () => {
