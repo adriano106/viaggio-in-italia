@@ -147,7 +147,7 @@ export function VerbDuel({ cityId }: { cityId: CityId }) {
 
         {/* Battle scene */}
         <div
-          className="card"
+          className="card battle-scene"
           style={{ width: '100%', display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'space-between' }}
         >
           <motion.div
@@ -156,7 +156,7 @@ export function VerbDuel({ cityId }: { cityId: CityId }) {
             transition={{ duration: 0.4 }}
             style={{ textAlign: 'center', flex: 1 }}
           >
-            <div style={{ fontSize: 46 }}>🧑‍🎓</div>
+            <div className="avatar" style={{ fontSize: 46 }}>🧑‍🎓</div>
             <div style={{ fontWeight: 800, fontSize: 14 }}>You</div>
             <div style={{ fontSize: 18, letterSpacing: 2 }}>
               {'❤️'.repeat(hearts)}
@@ -164,7 +164,7 @@ export function VerbDuel({ cityId }: { cityId: CityId }) {
             </div>
           </motion.div>
 
-          <div style={{ fontSize: 26, fontWeight: 900, color: 'var(--ink-soft)' }}>VS</div>
+          <div className="battle-vs" style={{ fontSize: 26, fontWeight: 900, color: 'var(--ink-soft)' }}>VS</div>
 
           <motion.div
             key={`e-${enemyFlinch}`}
@@ -172,7 +172,7 @@ export function VerbDuel({ cityId }: { cityId: CityId }) {
             transition={{ duration: 0.4 }}
             style={{ textAlign: 'center', flex: 1 }}
           >
-            <div style={{ fontSize: 46 }}>{city.opponent.emoji}</div>
+            <div className="avatar" style={{ fontSize: 46 }}>{city.opponent.emoji}</div>
             <div style={{ fontWeight: 800, fontSize: 14 }}>
               {city.opponent.name} {city.opponent.title}
             </div>

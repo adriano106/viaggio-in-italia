@@ -38,6 +38,9 @@ button {
   font-family: inherit;
   cursor: pointer;
   border: none;
+  /* Prevents the 300ms tap delay and double-tap zoom on touch screens —
+     essential for rapid-tap gameplay. */
+  touch-action: manipulation;
 }
 
 input {
@@ -119,7 +122,8 @@ input {
 .hud {
   display: flex;
   align-items: center;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: 10px 14px;
   padding: 10px 0 18px;
 }
 
@@ -431,6 +435,49 @@ input {
     padding: 6px 10px;
   }
   .xp-bar {
-    width: 70px;
+    width: 56px;
+  }
+  .card {
+    padding: 14px;
+  }
+  .game-title {
+    font-size: 18px;
+  }
+  .tile {
+    padding: 9px 12px;
+    font-size: 15px;
+  }
+  .tile-row {
+    gap: 8px;
+  }
+  .vocab-card {
+    font-size: 12.5px;
+    padding: 10px 6px;
+    min-height: 52px;
+  }
+  .bubble {
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+  .type-input {
+    font-size: 18px;
+    max-width: 100%;
+  }
+  .btn {
+    padding: 11px 18px;
+    font-size: 15px;
+  }
+  .feedback {
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+  .battle-scene {
+    gap: 8px !important;
+  }
+  .battle-scene .avatar {
+    font-size: 34px !important;
+  }
+  .battle-vs {
+    font-size: 18px !important;
   }
 }
