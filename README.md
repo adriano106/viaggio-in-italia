@@ -1,6 +1,8 @@
 # Viaggio in Italia 🇮🇹
 
-A gamified web game for learning **intermediate (B1) Italian**. Journey across a map of Italy from Napoli to Milano: each city teaches its own theme and grammar through mini-games, and you unlock the next city by beating its boss.
+A gamified web game for learning **intermediate (B1) Italian**. Journey across a map of Italy: each city teaches its own theme and grammar through mini-games, and you unlock the next city by beating its boss.
+
+**▶️ Play it now: https://adriano106.github.io/viaggio-in-italia/** — works on desktop and mobile, no install needed. Progress saves in your browser; use the in-game backup codes to move it between devices.
 
 ![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
